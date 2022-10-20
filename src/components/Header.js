@@ -5,13 +5,27 @@ import './Header.css'
 import Amazon from "../images/logo.png";
 import USA from "../images/usa.png";
 import BookStore from "../images/bookstore.png";
+import Cart from '../pages/Cart';
 import {ShoppingCartOutlined, MenuOutlined} from "@ant-design/icons";
 
 const {Search } = Input;
 const categories = ["Comics", "Dictionaries", "Novels", "Fantasy", "Horror", "Adventure"];
 
-const Header = () => {
+const Header = ({count}) => {
   const { authenticate, account } = useMoralis();
+
+  let cartQuantity = 0;
+  let products = localStorage.getItem("productList");
+  if(products !== null && products !== '')
+  {
+    // console.log(JSON.parse(products).length)
+    let parsedProducts = JSON.parse(products);
+    if (parsedProducts !== "" && parsedProducts !== null)
+    {
+      cartQuantity = parsedProducts.length;
+    }
+  }
+
   return(
     <div className="site-page-header-ghost-wrapper">
       <PageHeader
@@ -34,12 +48,15 @@ const Header = () => {
           </Button>
           <Space size={"large"}>
               
-              <Badge count={0} showZero>
-                <span className="header-buttons">
-                  <ShoppingCartOutlined className="header-icon" />
-                  Cart
-                </span>
-              </Badge>
+              <Link to="/cart" >
+              
+                <Badge count={count || cartQuantity} showZero>
+                  <span className="header-buttons">
+                    <ShoppingCartOutlined className="header-icon" />
+                    Cart
+                  </span>
+                </Badge>
+              </Link>
               <Space className="header-buttons" size={"small"}>
                 <img src={USA} alt="region" className="flag"></img>▾
               </Space> 
@@ -63,6 +80,9 @@ const Header = () => {
         })}
       </Space>
     </div>
+    
+    
+
     </div>
   )
 }
