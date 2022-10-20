@@ -32,9 +32,7 @@ const Header = ({count}) => {
         ghost={false}
         extra={[
           <>
-          <Link to="/">
           <img src={Amazon} className="logo"></img>
-          </Link>
           <img src={BookStore} className="logo"></img>
           <Search
               placeholder="Find A Product"
@@ -50,12 +48,15 @@ const Header = ({count}) => {
           </Button>
           <Space size={"large"}>
               
-              <Badge count={0} showZero>
-                <span className="header-buttons">
-                  <ShoppingCartOutlined className="header-icon" />
-                  Cart
-                </span>
-              </Badge>
+              <Link to="/cart" >
+              
+                <Badge count={count || cartQuantity} showZero>
+                  <span className="header-buttons">
+                    <ShoppingCartOutlined className="header-icon" />
+                    Cart
+                  </span>
+                </Badge>
+              </Link>
               <Space className="header-buttons" size={"small"}>
                 <img src={USA} alt="region" className="flag"></img>▾
               </Space> 
