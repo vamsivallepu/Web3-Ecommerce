@@ -5,13 +5,27 @@ import './Header.css'
 import Amazon from "../images/logo.png";
 import USA from "../images/usa.png";
 import BookStore from "../images/bookstore.png";
+import Cart from '../pages/Cart';
 import {ShoppingCartOutlined, MenuOutlined} from "@ant-design/icons";
 
 const {Search } = Input;
 const categories = ["Comics", "Dictionaries", "Novels", "Fantasy", "Horror", "Adventure"];
 
-const Header = () => {
+const Header = ({count}) => {
   const { authenticate, account } = useMoralis();
+
+  let cartQuantity = 0;
+  let products = localStorage.getItem("productList");
+  if(products !== null && products !== '')
+  {
+    // console.log(JSON.parse(products).length)
+    let parsedProducts = JSON.parse(products);
+    if (parsedProducts !== "" && parsedProducts !== null)
+    {
+      cartQuantity = parsedProducts.length;
+    }
+  }
+
   return(
     <div className="site-page-header-ghost-wrapper">
       <PageHeader
@@ -34,7 +48,8 @@ const Header = () => {
          onClick={() => authenticate()}>
           {account ? <span>{account.slice(0,5)}...</span> : <span>login</span>}
           </Button>
-          <Space size={"large"}>              
+          <Space size={"large"}>
+              
               <Badge count={0} showZero>
                 <span className="header-buttons">
                   <ShoppingCartOutlined className="header-icon" />
@@ -64,6 +79,9 @@ const Header = () => {
         })}
       </Space>
     </div>
+    
+    
+
     </div>
   )
 }

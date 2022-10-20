@@ -1,5 +1,7 @@
-import React from 'react';
-import { Rate } from 'antd';
+import React,{useState} from 'react';
+
+
+import { Rate,Button } from 'antd';
 import "./Product.css";
 import Header from '../components/Header';
 import { useLocation } from 'react-router';
@@ -9,10 +11,16 @@ import Purchase from '../components/Purchase';
 const Product = () => {
   
   let {state: book} = useLocation();
+  const [cartCount,setCartCount] = useState(0);
+  
+  const handleCount = (x) => {
+    setCartCount(x);  
+  }
+
   return (
   <>
   <div className="container">
-    <Header />
+    <Header count={cartCount} />
     <div className="product-content">
       <div>
         <div className="product-img">
@@ -37,9 +45,10 @@ const Product = () => {
           {book.about}
         </p>
       </div>
-      <div className="purchase-details">
-      <Purchase book={book}/>
-      </div>
+        <div className="purchase-details">
+          <Purchase book={book} setCount={handleCount} />
+        </div>
+      
     </div>
   </div>
   </>
