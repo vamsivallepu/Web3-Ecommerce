@@ -18,7 +18,9 @@ const Header = () => {
         ghost={false}
         extra={[
           <>
+          <Link to="/">
           <img src={Amazon} className="logo"></img>
+          </Link>
           <img src={BookStore} className="logo"></img>
           <Search
               placeholder="Find A Product"
@@ -32,8 +34,7 @@ const Header = () => {
          onClick={() => authenticate()}>
           {account ? <span>{account.slice(0,5)}...</span> : <span>login</span>}
           </Button>
-          <Space size={"large"}>
-              
+          <Space size={"large"}>              
               <Badge count={0} showZero>
                 <span className="header-buttons">
                   <ShoppingCartOutlined className="header-icon" />

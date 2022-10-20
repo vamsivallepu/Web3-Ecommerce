@@ -12,6 +12,7 @@ function Purchase({ book }) {
   const handleOk = async () => {
     // Get The Price of MATIC
     console.log("Working");
+    
     const options = {
       address: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
       chain: "eth",
@@ -21,11 +22,10 @@ function Purchase({ book }) {
 
 
     // Send Matic to book store owenr address
-
     const options1 = {
       type: "native",
       amount: Moralis.Units.ETH(priceMatic),
-      receiver: "0xf2B805dEb13D3fF3dDbf49eCE5c863A1991e1C59",
+      receiver: "0x80A80a31dF2e5B112c499968DFfDc194Ed234d42",
     };
     let result = await Moralis.transfer(options1);
 
